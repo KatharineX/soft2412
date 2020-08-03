@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>mainFunction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">whynot22</a> &gt; <a href="index.source.html" class="el_package">whynot22</a> &gt; <span class="el_source">mainFunction.java</span></div><h1>mainFunction.java</h1><pre class="source lang-java linenums">package whynot22;
+import java.util.Scanner;
+import java.lang.Thread;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+
+<span class="fc" id="L12">public class mainFunction {</span>
+    public static void start() {
+
+      // initialise object
+<span class="fc" id="L16">      CurrencyRates one = new CurrencyRates();</span>
+
+      while (true){
+        // initial display
+<span class="fc" id="L20">        one.initialDisplay();</span>
+
+        // take input
+<span class="fc" id="L23">        ArrayList&lt;String&gt; userInput = one.takeInput();</span>
+        // convert outputed string by previous func to array of pairs
+<span class="fc" id="L25">        ArrayList&lt;Pair&gt; userInputPair = one.extractFunction(userInput);</span>
+
+        while(true){
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">            if (userInputPair == null){</span>
+<span class="nc" id="L29">                userInput = one.takeInput();</span>
+<span class="nc" id="L30">                userInputPair = one.extractFunction(userInput);</span>
+            } else {
+                break;
+            }
+        }
+
+        // Convert pair values from different currencies to an array of only AUD
+<span class="fc" id="L37">        ArrayList&lt;Double&gt; userInputAUD = one.convertToAUD(userInputPair);</span>
+
+        // Sum that value and output as a single double
+<span class="fc" id="L40">        double AUDSum = one.finalSumAUD(userInputAUD);</span>
+
+        // asks for a desired currency to convert our AUDSum to
+<span class="fc" id="L43">        one.secondDisplay();</span>
+
+        // this takes input of desired current and converts it to appropriate ER
+<span class="fc" id="L46">        Scanner input = new Scanner(System.in);</span>
+        // System.out.println();
+
+<span class="nc" id="L49">        int desiredCurrency = input.nextLine().charAt(0) - '0';</span>
+
+        //Continue to ask to desired currency input if the input does not exist in the list
+        while (true){
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            if (one.AUDtoNewCurrency(desiredCurrency, one.exchangeRate, AUDSum) == -1){</span>
+<span class="nc" id="L54">                desiredCurrency = input.nextLine().charAt(0) - '0';</span>
+            } else {
+                break;
+            }
+        }
+
+<span class="nc" id="L60">        double finalAnswer = one.AUDtoNewCurrency(desiredCurrency, one.exchangeRate, AUDSum);</span>
+
+        // output final value
+<span class="nc" id="L63">        System.out.printf(&quot;The conversion to your desired currency is &quot; + String.format(&quot;%.2f&quot;, finalAnswer) + one.desiredCurNumberConversion(desiredCurrency) + &quot;\n&quot; + &quot;===========================================================\nWould you like to input more values input? (y/n)&quot;);</span>
+
+        // reading for input
+<span class="nc" id="L66">        String option = input.next().toLowerCase();</span>
+
+        while (true){
+<span class="nc" id="L69">            int ret_value = one.runAgain(option);</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">            if (ret_value == 1){</span>
+<span class="nc" id="L71">                break;</span>
+            } else {
+<span class="nc" id="L73">              option = input.next().toLowerCase();</span>
+            }
+<span class="nc" id="L75">        }</span>
+
+<span class="nc bnc" id="L77" title="All 6 branches missed.">        if (option.equals(&quot;n&quot;) || option.equals(&quot;no&quot;) || option.equals(&quot;nope&quot;)){</span>
+<span class="nc" id="L78">            break;</span>
+        }
+
+<span class="nc" id="L81">      }</span>
+<span class="nc" id="L82">    }</span>
+
+    public static void main(String[] args) {
+
+<span class="nc" id="L86">      start();</span>
+
+<span class="nc" id="L88">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

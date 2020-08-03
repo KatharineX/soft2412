@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CurrencyRates.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">whynot22</a> &gt; <a href="index.source.html" class="el_package">whynot22</a> &gt; <span class="el_source">CurrencyRates.java</span></div><h1>CurrencyRates.java</h1><pre class="source lang-java linenums">package whynot22;
+import java.util.ArrayList;
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.List;
+
+<span class="fc" id="L9">public class CurrencyRates implements CurrencyRatesInterface  {</span>
+
+<span class="fc" id="L11">		public ExchangeRate exchangeRate = new ExchangeRate();</span>
+
+		// Drop down menu that launches upon initial running of program
+		// Singapore Dollar
+		// Japanese Yen
+		// Chinese Yuan
+		// US Dollar
+		// South African Rand
+		// Instruction of what users should do; max 3; Maybe suggest input form?
+		// E.g. &lt;amountCurrency&gt; &lt;amountCurrency&gt; &lt;amountCurrency&gt;
+		// Basically all print statements
+		public boolean initialDisplay(){
+<span class="fc" id="L23">			System.out.println(&quot;\n==========================================================&quot;);</span>
+<span class="fc" id="L24">			System.out.println(&quot;1. Australian Dollar (AUD)&quot;);</span>
+<span class="fc" id="L25">	    System.out.println(&quot;2. US Dollar (USD)&quot;);</span>
+<span class="fc" id="L26">	    System.out.println(&quot;3. Singapore Dollar (SGD)&quot;);</span>
+<span class="fc" id="L27">	    System.out.println(&quot;4. Euro (EUR)&quot;);</span>
+<span class="fc" id="L28">	    System.out.println(&quot;5. Japanese Yen (JPY)&quot;);</span>
+<span class="fc" id="L29">			System.out.println();</span>
+<span class="fc" id="L30">			return true;</span>
+
+    }
+
+
+		// Store input values in an array
+		// One line sumCUR sumCUR sumCUR
+		// Example, 100.00AUD 10SGD 20CNY
+		public ArrayList&lt;String&gt; takeInput(){
+			//instructions given to user
+<span class="fc" id="L40">			System.out.println(&quot;Please input up to 3 different currencies you could&quot;);</span>
+<span class="fc" id="L41">			System.out.println(&quot;like to convert from, from the following list of currencies&quot;);</span>
+<span class="fc" id="L42">			System.out.println(&quot;e.g. 1300SGD 2000JPY 500USD&quot;);</span>
+<span class="fc" id="L43">			System.out.println(&quot;-----------------------------------------------------------&quot;);</span>
+			//create array list to store user input
+<span class="fc" id="L45">			ArrayList&lt;String&gt; convertFromList = new ArrayList&lt;String&gt;();</span>
+			//get user input
+<span class="fc" id="L47">			Scanner sc = new Scanner(System.in);</span>
+
+			//put user input into an arraylist
+<span class="fc" id="L50">			String line = sc.nextLine();</span>
+<span class="fc" id="L51">			String lineArray[] = line.split(&quot; &quot;);</span>
+
+			// transferring array values to ArrayList
+<span class="fc bfc" id="L54" title="All 2 branches covered.">			for (int i =0; i &lt; lineArray.length; i ++) {</span>
+<span class="fc" id="L55">				convertFromList.add(lineArray[i]);</span>
+			}
+
+
+
+			//check if user input is more than 4
+<span class="fc bfc" id="L61" title="All 2 branches covered.">			if(convertFromList.size() &gt; 3){</span>
+<span class="fc" id="L62">				System.out.println(&quot;Too many inputs, please recheck input.&quot;);</span>
+<span class="fc" id="L63">				return null;</span>
+			}
+
+<span class="fc" id="L66">				System.out.println(&quot;You inputed: &quot;);</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">				for (int i =0; i &lt; convertFromList.size(); i ++) {</span>
+<span class="fc" id="L68">						System.out.print(convertFromList.get(i) + &quot; &quot;);</span>
+
+				}
+<span class="fc" id="L71">				System.out.println(&quot;\n&quot;);</span>
+<span class="fc" id="L72">				return convertFromList;</span>
+		}
+
+
+
+		// Obtain amount and currency where x is amount and y is currency
+		// (x,y) using Pair class
+		//
+		// input: ArrayList returned from takeInput()
+		//
+		// Example. 100AUD -&gt; (100, AUD)
+		//
+		// Also use this function to check for valid inputs before creating a Pair object
+		// If all inputs are valid then append each pair to a new arraylist, PairList
+		// and return PairList
+		// Else return and print input error
+		public ArrayList&lt;Pair&gt; extractFunction(ArrayList&lt;String&gt; input){
+			// checking input isnt null or no inputs provided
+<span class="fc bfc" id="L90" title="All 4 branches covered.">			if (input == null || input.size() == 0) {</span>
+<span class="fc" id="L91">				System.out.println(&quot;No input provided&quot;);</span>
+<span class="fc" id="L92">				return null;</span>
+			}
+
+			// checking max 3 inputs provided
+<span class="fc bfc" id="L96" title="All 2 branches covered.">			if (input.size() &gt; 3) {</span>
+<span class="fc" id="L97">				System.out.println(&quot;Too Many Inputs&quot;);</span>
+<span class="fc" id="L98">				System.out.println(&quot;Please provide maximum 3 inputs&quot;);</span>
+<span class="fc" id="L99">				return null;</span>
+			}
+
+			// checking if any value in input array is null
+<span class="fc bfc" id="L103" title="All 2 branches covered.">			for (int i = 0; i &lt; input.size(); i ++) {</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">				if (input.get(i) == null) {</span>
+<span class="fc" id="L105">					System.out.print(&quot;Null input provided\n Please try again!\n&quot;);</span>
+<span class="fc" id="L106">					return null;</span>
+				}
+
+			}
+
+			//WHITEBOX TESTING
+			//System.out.println(&quot;array size: &quot; + input.size());
+			//System.out.println(&quot;array: &quot; + input);
+
+			//initialising output ArrayList
+<span class="fc" id="L116">			ArrayList&lt;Pair&gt; output = new ArrayList&lt;Pair&gt;();</span>
+
+			//splitting string into value and specified exchange rate
+			String current;
+<span class="fc" id="L120">			String valueString = &quot;invalid&quot;;</span>
+<span class="fc" id="L121">			String exchangeRate = &quot;invalid&quot;;</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">			for (int i = 0; i &lt; input.size(); i ++) {</span>
+<span class="fc" id="L123">				current = input.get(i);</span>
+
+<span class="fc bfc" id="L125" title="All 2 branches covered.">				if (current.length() &gt; 3){</span>
+					//extracting float value
+<span class="fc" id="L127">					valueString = current.substring(0, current.length() - 3);</span>
+
+					//extracting exchange rate value
+<span class="fc" id="L130">					exchangeRate = current.substring(current.length()-3);</span>
+				}
+				// //extracting float value
+				// valueString = current.substring(0, current.length() - 3);
+				//
+				// //extracting exchange rate value
+				// exchangeRate = current.substring(current.length()-3);
+
+				//WHITEBOX TESTING
+				//System.out.println(&quot;ER: &quot; + exchangeRate);
+
+<span class="fc bfc" id="L141" title="All 2 branches covered.">				if (checkValidExchangeRate(exchangeRate) == false) {</span>
+<span class="fc" id="L142">					System.out.println(&quot;Please use format YYYYYXXX , where Y is a digit or decimal and X is 3 letter exchange rate code\n&quot;);</span>
+<span class="fc" id="L143">					return null;</span>
+				}
+
+				Double value;
+
+				try {
+<span class="fc" id="L149">					value = Double.parseDouble(valueString);</span>
+<span class="fc" id="L150">				} catch (Exception e) {</span>
+<span class="fc" id="L151">					System.out.println(&quot;Invalid value&quot;);</span>
+<span class="fc" id="L152">					System.out.println(&quot;Please use format YYYYYXXX , where Y is a digit or decimal and X is 3 letter exchange rate code\n&quot;);</span>
+<span class="fc" id="L153">					return null;</span>
+<span class="fc" id="L154">				}</span>
+
+				//WHITEBOX TESTING
+				//System.out.println(&quot;VALUE: &quot; + value);
+
+<span class="fc" id="L159">				Pair tuple = new Pair(value, exchangeRate);</span>
+<span class="fc" id="L160">				output.add(tuple);</span>
+
+			}
+
+<span class="fc" id="L164">			return output;</span>
+    }
+
+		// used to check if a 3 letter exchange rate code is valid
+		private Boolean checkValidExchangeRate(String er) {
+			// accepted exchange rates
+<span class="fc" id="L170">			String accepted[] = new String[]{&quot;AUD&quot;,&quot;USD&quot;,&quot;SGD&quot;,&quot;EUR&quot;,&quot;JPY&quot;};</span>
+
+			// if er is found in array check will be flagged
+<span class="fc" id="L173">			Boolean check = false;</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">			for (int i = 0; i &lt; accepted.length; i ++) {</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">				if (accepted[i].equals(er)) {</span>
+<span class="fc" id="L176">					check = true;</span>
+				}
+			}
+<span class="fc" id="L179">			return check;</span>
+		}
+
+
+		// Loop through arrayList, and convert each currency to AUD and append each
+		// result to an arrayList, arrayOfSums and return arrayOfSums
+		// input: arraylist returned from extractFunction()
+		public ArrayList&lt;Double&gt; convertToAUD(ArrayList&lt;Pair&gt; input){
+<span class="fc bfc" id="L187" title="All 2 branches covered.">				if (input == null) {</span>
+<span class="fc" id="L188">					System.out.println(&quot;Error: Null Input!&quot;);</span>
+<span class="fc" id="L189">					return null;</span>
+				}
+
+<span class="fc bfc" id="L192" title="All 4 branches covered.">				if (input.size() == 0 || input.size() &gt; 3) {</span>
+<span class="fc" id="L193">					System.out.println(&quot;Error: Check number of inputs&quot;);</span>
+<span class="fc" id="L194">					return null;</span>
+				}
+
+
+				// set output array
+<span class="fc" id="L199">				ArrayList&lt;Double&gt; output = new ArrayList&lt;Double&gt;();</span>
+
+				// declare variables used in below for loop
+				Pair current;
+				double val;
+				double conversion;
+
+				// this for loop goes through each pair value converts it to AUD
+				// and adds it to output array. This output array gets returned
+<span class="fc bfc" id="L208" title="All 2 branches covered.">				for (int i = 0; i &lt; input.size(); i ++) {</span>
+<span class="fc" id="L209">					current = input.get(i);</span>
+
+					// getting the conversion value depending on corresponding exchange rate
+<span class="fc bfc" id="L212" title="All 2 branches covered.">					if (current.getER().equals(&quot;AUD&quot;)) {</span>
+<span class="fc" id="L213">						conversion = 1;</span>
+<span class="fc bfc" id="L214" title="All 2 branches covered.">					} else if (current.getER().equals(&quot;USD&quot;)) {</span>
+<span class="fc" id="L215">						conversion = exchangeRate.USD;</span>
+<span class="fc bfc" id="L216" title="All 2 branches covered.">					} else if (current.getER().equals(&quot;SGD&quot;)) {</span>
+<span class="fc" id="L217">						conversion = exchangeRate.SGD;</span>
+<span class="fc bfc" id="L218" title="All 2 branches covered.">					} else if (current.getER().equals(&quot;EUR&quot;)) {</span>
+<span class="fc" id="L219">						conversion = exchangeRate.EUR;</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">					} else if (current.getER().equals(&quot;JPY&quot;)) {</span>
+<span class="fc" id="L221">						conversion = exchangeRate.JPY;</span>
+					} else {
+<span class="fc" id="L223">						System.out.println(&quot;Invalid Currency! Try Again!&quot;);</span>
+<span class="fc" id="L224">						return null;</span>
+					}
+
+<span class="fc" id="L227">					val = (double) current.getVal();</span>
+<span class="fc" id="L228">					val = (double) val/conversion;</span>
+
+<span class="fc" id="L230">					output.add(val);</span>
+				}
+
+<span class="fc" id="L233">				return output;</span>
+    }
+
+
+		// Loop through arrayOfSums and add each value
+		// arrayOfSums: arraylist returned from convertToAUD()
+		// Return finalSum
+		public double finalSumAUD(ArrayList&lt;Double&gt; arrayOfSums){
+<span class="fc" id="L241">			double sum = 0;</span>
+<span class="fc bfc" id="L242" title="All 2 branches covered.">			for(int i = 0; i &lt; arrayOfSums.size(); i++){</span>
+<span class="fc" id="L243">					sum += arrayOfSums.get(i);</span>
+
+			}
+<span class="fc" id="L246">			 return sum;</span>
+    }
+
+
+		// Display with avaiable currencies for user to convert to
+		// Print a number with a corresponding currency
+		public boolean secondDisplay(){
+
+<span class="fc" id="L254">			System.out.println(&quot;===========================================================&quot;);</span>
+<span class="fc" id="L255">			System.out.println(&quot;Please Select Number Value Corresponding to&quot;);</span>
+<span class="fc" id="L256">			System.out.println(&quot;the Exchange Rate you would like to convert to&quot;);</span>
+<span class="fc" id="L257">			System.out.println(&quot;eg if you would like to convert to AUD please select 1&quot;);</span>
+
+<span class="fc" id="L259">			System.out.println(&quot;-----------------------------------------------------------&quot;);</span>
+
+<span class="fc" id="L261">			System.out.println(&quot;1. Australian Dollar (AUD)&quot;);</span>
+<span class="fc" id="L262">			System.out.println(&quot;2. US Dollar (USD)&quot;);</span>
+<span class="fc" id="L263">			System.out.println(&quot;3. Singapore Dollar (SGD)&quot;);</span>
+<span class="fc" id="L264">			System.out.println(&quot;4. Euro (EUR)&quot;);</span>
+<span class="fc" id="L265">			System.out.println(&quot;5. Japanese Yen (JPY)&quot;);</span>
+
+<span class="fc" id="L267">			System.out.println(&quot;-----------------------------------------------------------&quot;);</span>
+<span class="fc" id="L268">			return true;</span>
+    }
+
+
+		// Convert sum returned from finalSumAUD() to desired currency
+		// x: user would input a number that corresponds to a currency they would
+		// like to convert to
+
+		// return finalanswer
+		public double AUDtoNewCurrency(int x, ExchangeRate rates, double sum){
+<span class="fc" id="L278">			double finalAnswer = 0;</span>
+
+				// Valid to continue
+				// {AUD, USD, SGD, EUR, JPY};
+				// Search list for that currency rate
+<span class="fc bfc" id="L283" title="All 2 branches covered.">				if (x == 1){</span>
+<span class="fc" id="L284">					finalAnswer = (rates.AUD) * sum;</span>
+<span class="fc" id="L285">					finalAnswer = (double) Math.round(finalAnswer * 100) / 100;</span>
+<span class="fc" id="L286">					return finalAnswer;</span>
+<span class="fc bfc" id="L287" title="All 2 branches covered.">				}else if (x == 2){</span>
+<span class="fc" id="L288">					finalAnswer = (rates.USD) * sum;</span>
+<span class="fc" id="L289">					finalAnswer = (double) Math.round(finalAnswer * 100) / 100;</span>
+<span class="fc" id="L290">					return finalAnswer;</span>
+<span class="fc bfc" id="L291" title="All 2 branches covered.">				}else if (x == 3){</span>
+<span class="fc" id="L292">					finalAnswer = (rates.SGD) * sum;</span>
+<span class="fc" id="L293">					finalAnswer = (double) Math.round(finalAnswer * 100) / 100;</span>
+<span class="fc" id="L294">					return finalAnswer;</span>
+<span class="fc bfc" id="L295" title="All 2 branches covered.">				}else if (x == 4){</span>
+<span class="fc" id="L296">					finalAnswer = (rates.EUR) * sum;</span>
+<span class="fc" id="L297">					finalAnswer = (double) Math.round(finalAnswer * 100) / 100;</span>
+<span class="fc" id="L298">					return finalAnswer;</span>
+<span class="fc bfc" id="L299" title="All 2 branches covered.">				}else if (x == 5){</span>
+<span class="fc" id="L300">					finalAnswer = (rates.JPY) * sum;</span>
+<span class="fc" id="L301">					finalAnswer = (double) Math.round(finalAnswer * 100) / 100;</span>
+<span class="fc" id="L302">					return finalAnswer;</span>
+				}else {
+<span class="fc" id="L304">					System.out.println(&quot;You entered: &quot; + x + &quot;\nThis is not supported! Please enter a number between 1 and 5.&quot;);</span>
+<span class="fc" id="L305">					return -1;</span>
+				}
+    }
+
+		//Converts a number to the corresponding currency
+		public String desiredCurNumberConversion(int desiredCurrency){
+<span class="fc" id="L311">				String desiredCur = &quot;AUD&quot;;</span>
+<span class="fc bfc" id="L312" title="All 2 branches covered.">				if (desiredCurrency == 2){</span>
+<span class="fc" id="L313">						desiredCur = &quot;USD&quot;;</span>
+<span class="fc bfc" id="L314" title="All 2 branches covered.">				} else if (desiredCurrency == 3){</span>
+<span class="fc" id="L315">						desiredCur = &quot;SGD&quot;;</span>
+<span class="fc bfc" id="L316" title="All 2 branches covered.">				} if (desiredCurrency == 4){</span>
+<span class="fc" id="L317">						desiredCur = &quot;EUR&quot;;</span>
+<span class="fc bfc" id="L318" title="All 2 branches covered.">				} if (desiredCurrency == 5){</span>
+<span class="fc" id="L319">						desiredCur = &quot;JPY&quot;;</span>
+				}
+<span class="fc" id="L321">				return desiredCur;</span>
+		}
+
+		//Helper Function for main: Takes in userinput after conversion is done.
+		//Returns 1 to break out of while loop
+		public int runAgain(String userInput){
+<span class="fc bfc" id="L327" title="All 4 branches covered.">				if (userInput.equals(&quot;y&quot;) || userInput.equals(&quot;yes&quot;)) {</span>
+<span class="fc" id="L328">						System.out.println(&quot;You inputted: &quot; + userInput);</span>
+<span class="fc" id="L329">						return 1;</span>
+
+<span class="fc bfc" id="L331" title="All 4 branches covered.">				} else if (userInput.equals(&quot;n&quot;) || userInput.equals(&quot;no&quot;)){</span>
+<span class="fc" id="L332">					System.out.println(&quot;Thankyou! Come Again XD! PEACE!&quot;);</span>
+<span class="fc" id="L333">						return 1;</span>
+				} else {
+<span class="fc" id="L335">					System.out.println(&quot;You inputted: &quot; + userInput + &quot;. Please input yes or no!&quot;);</span>
+<span class="fc" id="L336">					return 2;</span>
+				}
+		}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

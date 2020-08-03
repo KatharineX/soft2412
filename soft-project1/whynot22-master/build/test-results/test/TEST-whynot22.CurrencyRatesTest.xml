@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="whynot22.CurrencyRatesTest" tests="38" skipped="0" failures="0" errors="0" timestamp="2019-09-20T07:13:16" hostname="Linas-Air-2" time="0.151">
+  <properties/>
+  <testcase name="testconvertToAUDcheckLengthLessThanFour" classname="whynot22.CurrencyRatesTest" time="0.028"/>
+  <testcase name="testExtractFunctionCheckLengthNotZero" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="testExtractFunctionCheckNull" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="testconvertToAUDNullInputCheck" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="testconvertToAUDcheckLengthNotZero" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="testFinalConvertUSDStandard" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="FinalConvertSGDStandard" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="testTooManyInput" classname="whynot22.CurrencyRatesTest" time="0.015"/>
+  <testcase name="testMain" classname="whynot22.CurrencyRatesTest" time="0.047"/>
+  <testcase name="displaying" classname="whynot22.CurrencyRatesTest" time="0.004"/>
+  <testcase name="desiredCurNumberConversionEUR" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="desiredCurNumberConversionJPY" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="desiredCurNumberConversionSGD" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="desiredCurNumberConversionUSD" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="testExtractFunctionMissingCounterPart" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="testFinalConvertAUDStandard" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="finalSumTest1" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="finalSumTest2" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="testconvertfromAUD" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="testconvertfromEUR" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="testconvertfromJPY" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="testconvertfromSGD" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="testconvertfromUSD" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="runAgainYes" classname="whynot22.CurrencyRatesTest" time="0.008"/>
+  <testcase name="FinalConvertEURStandard" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="testExtractFunctionForIncorrectCurrency" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="testExtractFunctionStandardStringToPairOutput" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="runAgainOther" classname="whynot22.CurrencyRatesTest" time="0.01"/>
+  <testcase name="testExtractFunctionForSingleNullValue" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="FinalConvertJPYStandard" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="testExtractFunctionCheckInputFormat" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="testIfTakeInputFunctionWorks" classname="whynot22.CurrencyRatesTest" time="0.003"/>
+  <testcase name="testExtractFunctionInvalidValue2" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <testcase name="runAgainNo" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="testExtractFunctionInvalidValue" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="FinalConvertFail" classname="whynot22.CurrencyRatesTest" time="0.008"/>
+  <testcase name="testconvertfromInvalidER" classname="whynot22.CurrencyRatesTest" time="0.0"/>
+  <testcase name="testExtractFunctionCheckLengthLessThanFour" classname="whynot22.CurrencyRatesTest" time="0.001"/>
+  <system-out><![CDATA[Error: Check number of inputs
+No input provided
+No input provided
+Error: Null Input!
+Error: Check number of inputs
+Please input up to 3 different currencies you could
+like to convert from, from the following list of currencies
+e.g. 1300SGD 2000JPY 500USD
+-----------------------------------------------------------
+Too many inputs, please recheck input.
+
+==========================================================
+1. Australian Dollar (AUD)
+2. US Dollar (USD)
+3. Singapore Dollar (SGD)
+4. Euro (EUR)
+5. Japanese Yen (JPY)
+
+Please input up to 3 different currencies you could
+like to convert from, from the following list of currencies
+e.g. 1300SGD 2000JPY 500USD
+-----------------------------------------------------------
+You inputed: 
+100AUD 
+
+===========================================================
+Please Select Number Value Corresponding to
+the Exchange Rate you would like to convert to
+eg if you would like to convert to AUD please select 1
+-----------------------------------------------------------
+1. Australian Dollar (AUD)
+2. US Dollar (USD)
+3. Singapore Dollar (SGD)
+4. Euro (EUR)
+5. Japanese Yen (JPY)
+-----------------------------------------------------------
+Exception!
+
+==========================================================
+1. Australian Dollar (AUD)
+2. US Dollar (USD)
+3. Singapore Dollar (SGD)
+4. Euro (EUR)
+5. Japanese Yen (JPY)
+
+===========================================================
+Please Select Number Value Corresponding to
+the Exchange Rate you would like to convert to
+eg if you would like to convert to AUD please select 1
+-----------------------------------------------------------
+1. Australian Dollar (AUD)
+2. US Dollar (USD)
+3. Singapore Dollar (SGD)
+4. Euro (EUR)
+5. Japanese Yen (JPY)
+-----------------------------------------------------------
+Please use format YYYYYXXX , where Y is a digit or decimal and X is 3 letter exchange rate code
+
+You inputted: yes
+You inputted: y
+Please use format YYYYYXXX , where Y is a digit or decimal and X is 3 letter exchange rate code
+
+You inputted: i'm a rebel. Please input yes or no!
+Null input provided
+ Please try again!
+Please use format YYYYYXXX , where Y is a digit or decimal and X is 3 letter exchange rate code
+
+Please input up to 3 different currencies you could
+like to convert from, from the following list of currencies
+e.g. 1300SGD 2000JPY 500USD
+-----------------------------------------------------------
+You inputed: 
+ABD123 BCD123 
+
+Invalid value
+Please use format YYYYYXXX , where Y is a digit or decimal and X is 3 letter exchange rate code
+
+Thankyou! Come Again XD! PEACE!
+Thankyou! Come Again XD! PEACE!
+Invalid value
+Please use format YYYYYXXX , where Y is a digit or decimal and X is 3 letter exchange rate code
+
+You entered: 6
+This is not supported! Please enter a number between 1 and 5.
+Invalid Currency! Try Again!
+Too Many Inputs
+Please provide maximum 3 inputs
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
